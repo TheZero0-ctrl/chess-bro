@@ -8,7 +8,7 @@ class Game < ApplicationRecord
     draw: 'draw'
   }
 
-  enum turns: {
+  enum turn: {
     white: 'white',
     black: 'black'
   }
@@ -17,7 +17,7 @@ class Game < ApplicationRecord
   before_create :set_pgn
 
   def set_fen
-    turn_abbreviation = turn.white? ? 'w' : 'b'
+    turn_abbreviation = white? ? 'w' : 'b'
     self.fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR #{turn_abbreviation} KQkq - 0 1"
   end
 

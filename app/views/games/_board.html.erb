@@ -1,0 +1,21 @@
+<%= content_tag(:div, "", data: {
+    controller: "chess",
+    "chess-game-id-value": game.id,
+    "chess-player-id-value": current_user.id,
+    "chess-fen-value": game.fen,
+    "chess-turn-value": game.turn[0],
+    "chess-orientation-value": game.orientation(current_user)
+}, style: "width: 400px") do %>
+  <div id="board"></div>
+  <strong>State:</strong>
+  <%= content_tag(:div, "", data: {
+      chess_target: "state"
+    }) do %>
+    <%= game.state %>
+  <% end %>
+  <%= content_tag(:div, "", data: {
+      chess_target: "fen"
+    }) do %>
+    <%= game.fen %>
+  <% end %>
+<% end %>

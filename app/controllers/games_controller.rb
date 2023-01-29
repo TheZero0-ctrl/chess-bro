@@ -19,10 +19,17 @@ class GamesController < ApplicationController
 
   # POST /games or /games.json
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(
+      turn: :white,
+      state: :in_progress,
+      white_player_id: params[:game][:white_player_id],
+      black_player_id: params[:game][:black_player_id]
+    )
 
     respond_to do |format|
       if @game.save
+        Playable.create(game: @game, user_id: params[:game][:challenger_id])
+        Playable.create(game: @game, user_id: params[:game][:challengee_id])
         format.html { redirect_to game_url(@game), notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else

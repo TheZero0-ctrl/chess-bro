@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :games, through: :playables
 
   def game_in_progress_with(target_user)
-    games.where(id: target_user.games, state: in_progress)
+    games.where(id: target_user.games, state: "in_progress")
   end
 end
